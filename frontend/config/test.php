@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 return [
     'id' => 'app-frontend-tests',
     'components' => [
@@ -10,6 +13,10 @@ return [
         ],
         'request' => [
             'cookieValidationKey' => 'test',
+        ],
+        'mailer' => [
+            'messageClass' => \yii\symfonymailer\Message::class,
+            'viewPath' => '@common/mail',
         ],
     ],
 ];

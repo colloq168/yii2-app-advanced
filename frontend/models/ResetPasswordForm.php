@@ -1,25 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\models;
 
+use common\models\User;
+use Yii;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
-use Yii;
-use common\models\User;
 
 /**
  * Password reset form
  */
 class ResetPasswordForm extends Model
 {
-    public $password;
-
-    /**
-     * @var \common\models\User
-     */
-    private $_user;
-
-
+    public string $password = '';
+    private User|null $_user = null;
     /**
      * Creates a form model given a token.
      *
@@ -27,9 +23,9 @@ class ResetPasswordForm extends Model
      * @param array $config name-value pairs that will be used to initialize the object properties
      * @throws InvalidArgumentException if token is empty or not valid
      */
-    public function __construct($token, $config = [])
+    public function __construct(string $token, array $config = [])
     {
-        if (empty($token) || !is_string($token)) {
+        if ($token === '') {
             throw new InvalidArgumentException('Password reset token cannot be blank.');
         }
         $this->_user = User::findByPasswordResetToken($token);
@@ -42,7 +38,7 @@ class ResetPasswordForm extends Model
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['password', 'required'],
@@ -55,7 +51,7 @@ class ResetPasswordForm extends Model
      *
      * @return bool if password was reset.
      */
-    public function resetPassword()
+    public function resetPassword(): bool
     {
         $user = $this->_user;
         $user->setPassword($this->password);

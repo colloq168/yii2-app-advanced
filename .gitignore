@@ -6,6 +6,9 @@
 # phpstorm project files
 .idea
 
+# visual studio code project files
+.vscode
+
 # netbeans project files
 nbproject
 
@@ -22,9 +25,15 @@ Thumbs.db
 
 # composer itself is not needed
 composer.phar
+composer.lock
 
 # Mac DS_Store Files
 .DS_Store
+
+# node
+/node_modules
+/package.json
+/package-lock.json
 
 # phpunit itself is not needed
 phpunit.phar

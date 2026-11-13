@@ -1,17 +1,22 @@
 <?php
 
 return [
+    'container' => [
+        'singletons' => [
+            \yii\mail\MailerInterface::class => [
+                'class' => \yii\symfonymailer\Mailer::class,
+                'viewPath' => '@common/mail',
+            ],
+        ],
+    ],
     'components' => [
         'db' => [
-            'class' => 'yii\db\Connection',
+            'class' => \yii\db\Connection::class,
             'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@common/mail',
-        ],
+        'mailer' => \yii\mail\MailerInterface::class,
     ],
 ];
